@@ -179,12 +179,10 @@ class UserController {
             avatar_back: avatar
         })
         var res = await data.save()
-
         await avatars.move(Helpers.tmpPath(), {
             name: avatar,
             overwrite: true
         })
-
         if (!avatars.moved()) return avatars.error()
         return Response.response(res, 200, "cadastrado com sucesso")
     }
