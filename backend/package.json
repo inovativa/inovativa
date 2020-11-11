@@ -1,0 +1,36 @@
+{
+  "name": "inovativa",
+  "version": "4.1.0",
+  "adonis-version": "4.1.0",
+  "description": "Hoje o maior programa de aceleração de startups da América Latina",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node ace test"
+  },
+  "keywords": [
+    "adonisjs",
+    "adonis-app"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@adonisjs/ace": "^5.0.8",
+    "@adonisjs/auth": "^3.1.0",
+    "@adonisjs/bodyparser": "^2.0.9",
+    "@adonisjs/cors": "^1.0.7",
+    "@adonisjs/fold": "^4.0.9",
+    "@adonisjs/framework": "^5.0.9",
+    "@adonisjs/ignitor": "^2.0.8",
+    "@adonisjs/lucid": "^6.2.1",
+    "@adonisjs/mail": "^3.0.10",
+    "@adonisjs/websocket": "^1.0.12",
+    "mysql": "^2.18.1",
+    "nexmo": "^2.9.1",
+    "pg": "^8.4.0"
+  },
+  "autoload": {
+    "App": "./app"
+  }
+}
