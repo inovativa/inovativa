@@ -19,6 +19,7 @@ export const MenubarStyles = styled.div`
     100% {
       opacity: 1;
     }
+  }
 `;
 export const ContainerStyles = styled.div`
   width: 100%;
