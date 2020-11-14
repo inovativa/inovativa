@@ -7,8 +7,8 @@ class EventoSchema extends Schema {
   up () {
     this.table('eventos', (table) => {
       // alter table
-      table.integer('data').unsigned().notNullable().after('description')
-      table.integer('hora').unsigned().notNullable().after('data')
+      table.date('data').notNullable().after('description')
+      table.string('hora').notNullable().after('data')
     })
   }
 

@@ -6,11 +6,11 @@ const Evento = use('App/Models/Evento')
 class EventoController {
 
     async index({request}){
-         try { 
+         try {
             const {uf}=request.all()
             if(uf==null){
                 const res = await Database.select('*')
-                .table('users')   
+                .table('users')
                 .leftJoin("eventos", "users.id","eventos.user_id")
                 .leftJoin("perfils", "users.perfil_id","perfils.id")
                 .where('eventos.id','>',0)
@@ -29,7 +29,7 @@ class EventoController {
                 return Response.response(list, 200, "cadastrado com sucesso")
             }
               const res = await Database.select('*')
-                .table('users')   
+                .table('users')
                 .leftJoin("eventos", "users.id","eventos.user_id")
                 .leftJoin("perfils", "users.perfil_id","perfils.id")
                 .where('eventos.id','>',0)
@@ -51,13 +51,13 @@ class EventoController {
                 return Response.response(list, 200, "cadastrado com sucesso")
         } catch (err) {
             return Response.response(err, 500, "error no cadastro")
-        }  
+        }
     }
     async indexOne({ params }){
-         try { 
+         try {
             const {id}=params
                 const res = await Database.select('*')
-                .table('users')   
+                .table('users')
                 .leftJoin("eventos", "users.id","eventos.user_id")
                 .leftJoin("perfils", "users.perfil_id","perfils.id")
                 .where('eventos.id',id)
@@ -78,11 +78,12 @@ class EventoController {
                 return Response.response(list, 200, "cadastrado com sucesso")
         } catch (err) {
             return Response.response(err, 500, "error no cadastro")
-        }  
+        }
     }
 
     async create({ params,request }) {
         const {address, title, description,hora,data} = request.all()
+        const {address, title, description,date, hora} = request.all()
         const validationOptions = {
             types: ['image'],
             size: '500mb',
@@ -90,6 +91,7 @@ class EventoController {
         }
         //try {
         const avatars = request.file('file', validationOptions)
+        console.log(request.file);
         var avatar = `event/${new Date().getTime()}.${avatars.extname}`
             const res = await Evento.create({
                 user_id:params.id,
@@ -98,24 +100,27 @@ class EventoController {
                 data: data,
                 hora: hora,
                 title: title,
-                description: description
+                description: description,
+                data: date,
+                hora: hora
             })
             await avatars.move(Helpers.tmpPath(), {
                 name: avatar,
                 overwrite: true
              })
-             
+
         if (!avatars.moved()) return avatars.error()
             return Response.response(res, 200, "cadastrado com sucesso")
        /*  } catch (err) {
+        /* } catch (err) {
             return Response.response(err, 500, "error no cadastro")
         } */
     }
-  
-   async delete({params}){ 
+
+   async delete({params}){
     const {id}=params
-    const res=await Evento.query().where('id',id).delete()   
-    return Response.response(res, 200, "deletado com sucesso")  
+    const res=await Evento.query().where('id',id).delete()
+    return Response.response(res, 200, "deletado com sucesso")
   }
 }
 

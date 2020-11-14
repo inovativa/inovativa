@@ -17,6 +17,7 @@ export const Input: React.FC<InputProps> = ({
   ...rest
 }) => {
   const inputRef = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { fieldName, defaultValue, error, registerField } = useField(name);
   useEffect(() => {
     registerField({

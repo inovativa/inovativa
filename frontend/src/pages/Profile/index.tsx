@@ -86,9 +86,9 @@ const Register: React.FC = () => {
             'Informe seu perfil startup, empresa, investidor ou mentor.',
           ),
         });
-        /* await schema.validate(values, {
+        await schema.validate(values, {
           abortEarly: false,
-        }); */
+        });
         await api.post(`/update/${perfil_id}/${id}`, values);
         refreshUser(id);
         addToast({

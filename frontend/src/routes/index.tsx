@@ -8,6 +8,7 @@ import PageRegister from '../pages/Register/index';
 import CreateEvent from '../pages/CreateEvent/index';
 import CreateArtigo from '../pages/CreateArtigo/index';
 import Profile from '../pages/Profile/index';
+import ListProfile from '../pages/ListProfile';
 
 const Routes: React.FC = () => {
   return (
@@ -19,6 +20,7 @@ const Routes: React.FC = () => {
       <Route path="/CreateEvent" component={CreateEvent} isPrivate />
       <Route path="/CreateArtigo" component={CreateArtigo} isPrivate />
       <Route path="/Profile" component={Profile} isPrivate />
+      <Route path="/ListProfile" component={ListProfile} isPrivate />
     </Switch>
   );
 };

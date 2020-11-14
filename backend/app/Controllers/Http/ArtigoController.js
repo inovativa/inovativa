@@ -55,11 +55,12 @@ class ArtigoController {
 
 
     async index({params,request}){
-        try { 
+      console.log(params);
+        try {
            const { uf }=request.all()
            if(uf==null){
             const res = await Database.select('*')
-            .table('users')   
+            .table('users')
             .leftJoin("artigos", "users.id","artigos.user_id")
             .where('artigos.id','>',0)
             .where('artigos.user_id',params.id)
@@ -79,7 +80,7 @@ class ArtigoController {
                return Response.response(list, 200, "cadastrado com sucesso")
            }
             const res = await Database.select('*')
-            .table('users')   
+            .table('users')
             .leftJoin("artigos", "users.id","artigos.user_id")
             .where('artigos.id','>',0)
             .where('artigos.user_id',params.id)
@@ -100,7 +101,7 @@ class ArtigoController {
              return Response.response(list, 200, "cadastrado com sucesso")
          } catch (err) {
            return Response.response(err, 500, "error no cadastro")
-       } 
+       }
    }
     async indexOne({params}){
         try {
@@ -113,11 +114,11 @@ class ArtigoController {
                    subtitle: item.subtitle,
                    avatar: `http://localhost:3333/${item.avatar}`,
                    date: item.created_at
-                 }        
+                 }
            return Response.response(data, 200, "cadastrado com sucesso")
          } catch (err) {
            return Response.response(err, 500, "não existe dado cadastro!")
-       } 
+       }
    }
 
    async create({ request,params }) {
@@ -128,7 +129,7 @@ class ArtigoController {
            extnames: ['png', 'jpg', 'svg', 'gif', 'PNG', 'JPG', 'SVG', 'GIF']
        }
        try {
-           
+
        const avatars = request.file('file', validationOptions)
        var avatar = `artigos/${new Date().getTime()}.${avatars.extname}`
            const res = await Artigo.create({
@@ -141,7 +142,7 @@ class ArtigoController {
            await avatars.move(Helpers.tmpPath(), {
                name: avatar,
                overwrite: true
-            })            
+            })
        if (!avatars.moved()) return avatars.error()
            return Response.response(res, 200, "cadastrado com sucesso")
        } catch (err) {
@@ -149,10 +150,10 @@ class ArtigoController {
        }
    }
 
-   async delete({params}){ 
+   async delete({params}){
      const {id}=params
-     const res=await Artigo.query().where('id',id).delete()   
-     return Response.response(res, 200, "deletado com sucesso")  
+     const res=await Artigo.query().where('id',id).delete()
+     return Response.response(res, 200, "deletado com sucesso")
    }
 }
 
