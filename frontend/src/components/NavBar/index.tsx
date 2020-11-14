@@ -6,9 +6,19 @@ import { ContainerStyles, MenubarStyles, LeftMenu, RigthMenu } from './styles';
 
 import LogoSmall from '../../assets/images/LogoSmall.svg';
 import conected from '../../assets/images/conected.svg';
-import conectedAtive from '../../assets/images/conectedActive.svg';
+import { useAuth } from '../../hooks/AuthContext';
+// import conectedAtive from '../../assets/images/conectedActive.svg';
 
-const NavBar: React.FC = () => {
+interface NavBarProps {
+  page: string;
+}
+interface userAuthentcate {
+  avatar_front?: string;
+}
+
+const NavBar: React.FC<NavBarProps> = ({ page }) => {
+  const { user } = useAuth();
+  const newUser = user as userAuthentcate;
   return (
     <MenubarStyles>
       <ContainerStyles>
@@ -17,21 +27,37 @@ const NavBar: React.FC = () => {
             <img src={LogoSmall} alt="Logo" className="logo" />
           </Link>
           <ul>
-            <li className="icon active">
+            <li className={page === 'landing' ? 'icon active' : 'icon'}>
               <Link to="/landing">
-                <FiHome color="FFF05A" size={22} title="Home" />
+                <FiHome
+                  color={page === 'landing' ? 'FFF05A' : 'FFFFFF'}
+                  size={22}
+                  title="Home"
+                />
               </Link>
             </li>
-            <li className="icon">
-              <Link to="/landing">
-                <FiCalendar color="FFF" size={22} title="Calendário" />
-              </Link>
-            </li>
-            <li className="icon">
-              <Link to="/landing">
-                <FiFilePlus color="FFF" size={22} title="Criar Evento" />
-              </Link>
-            </li>
+            {user && (
+              <li className={page === 'createEvent' ? 'icon active' : 'icon'}>
+                <Link to="/createEvent">
+                  <FiCalendar
+                    color={page === 'createEvent' ? 'FFF05A' : 'FFFFFF'}
+                    size={22}
+                    title="Criar Evento"
+                  />
+                </Link>
+              </li>
+            )}
+            {user && (
+              <li className={page === 'createArtigo' ? 'icon active' : 'icon'}>
+                <Link to="/createArtigo">
+                  <FiFilePlus
+                    color={page === 'createArtigo' ? 'FFF05A' : 'FFFFFF'}
+                    size={22}
+                    title="Criar Artigo"
+                  />
+                </Link>
+              </li>
+            )}
           </ul>
         </LeftMenu>
         <RigthMenu>
@@ -39,15 +65,28 @@ const NavBar: React.FC = () => {
             <FiSearch size={20} color="000" />
             <input type="text" />
           </div>
-          <div className="avatar">{/* <img src={} /> */}</div>
-          <div className="conectedIconContainer">
-            <img
-              src={conected}
-              alt="conected"
-              className="conectedIcon"
-              title="Conectado"
-            />
-          </div>
+          {user && (
+            <div className={page === 'profile' ? 'avatar active' : 'avatar'}>
+              <Link to="/profile">
+                <img
+                  src={newUser.avatar_front}
+                  alt="avatar"
+                  className="avatarImage"
+                  title="Avatar"
+                />
+              </Link>
+            </div>
+          )}
+          {user && (
+            <div className="conectedIconContainer">
+              <img
+                src={conected}
+                alt="conected"
+                className="conectedIcon"
+                title="Conectado"
+              />
+            </div>
+          )}
         </RigthMenu>
       </ContainerStyles>
     </MenubarStyles>

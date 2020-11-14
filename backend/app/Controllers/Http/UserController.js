@@ -68,7 +68,7 @@ class UserController {
                     date: item.created_at
                 }
             })
-            return Response.response(list, 200, "cadastrado com sucesso")
+            return Response.response(list[0], 200, "cadastrado com sucesso")
         } catch (err) {
             return Response.response(err, 500, "error no cadastro")
         }
@@ -103,9 +103,11 @@ class UserController {
         try {
             const { email, password } = request.all()
             const res = await auth.attempt(email, password)
-            return Response.response(res, 200, "cadastrado com sucesso")
+            const token = res.token;
+            const user = await User.find({email});
+            return Response.response({ token, user}, 200, "cadastrado com sucesso")
         } catch (err) {
-            return Response.response(err, 500, "error no cadastro")
+            return Response.response(err, 400, "error no login")
         }
     }
 
@@ -113,7 +115,7 @@ class UserController {
         const { id,pf } = params
         const { username, email, password, empresa, whatsapp, site,
             linkedin, descricao_empresa, city, uf, interesse } = request.all()
-            
+
         try {
             const data = await User.find(id)
              await data.merge({
@@ -134,7 +136,7 @@ class UserController {
             var res = await data.save()
             return Response.response(res, 200, "cadastrado com sucesso")
         } catch (err) {
-            return Response.response(err, 500, "error no cadastro")
+            return Response.response(err.message, 500, "error no cadastro")
         }
     }
 
@@ -161,7 +163,7 @@ class UserController {
 
         if (!avatars.moved()) return avatars.error()
         return Response.response(res, 200, "cadastrado com sucesso")
-   
+
     }
 
     async uploadBack({ params, request, response }) {

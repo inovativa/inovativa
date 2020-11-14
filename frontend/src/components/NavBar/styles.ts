@@ -36,15 +36,16 @@ export const RigthMenu = styled.div`
     display: flex;
     align-items: center;
     background-color: #fff;
-    border-radius: 0.6rem;
+    border-radius: 1rem;
     height: 2rem;
     width: 18rem;
+    padding-left: 0.3rem;
     & svg {
       margin-left: 0.3rem;
       margin-right: 0.3rem;
     }
     & input {
-      width: calc(100% - 35px);
+      width: calc(100% - 37px);
       border: none;
       outline: 0;
       overflow: hidden;
@@ -52,15 +53,18 @@ export const RigthMenu = styled.div`
       font-size: 1rem;
     }
   }
-  .avatar {
-    margin-left: 1.5rem;
-    height: 2.5rem;
-    width: 2.5rem;
+  .avatarImage {
+    height: 2.3rem;
+    width: 2.3rem;
     border-radius: 50%;
     background: #fff;
     cursor: pointer;
   }
-  .conectedIconContainer {
+  .avatarImage:hover {
+    border: 0.3rem solid #fff;
+  }
+  .conectedIconContainer,
+  .avatar {
     height: 100%;
     width: 3rem;
     display: flex;
@@ -69,8 +73,23 @@ export const RigthMenu = styled.div`
     margin-left: 1rem;
     cursor: pointer;
   }
-  .conectedIconContainer:hover {
+  .conectedIconContainer img {
+    width: 1.3rem;
+    height: 1.3rem;
+  }
+  .conectedIconContainer:hover,
+  .avatar:hover {
     border-bottom: 0.3rem solid #fff;
+  }
+  .active {
+    .avatarImage {
+      height: 2.5rem;
+      width: 2.5rem;
+      border: 0.3rem solid #fff05a;
+    }
+  }
+  .active {
+    border-bottom: 0.3rem solid #fff05a;
   }
   .active:hover {
     border-bottom: 0.3rem solid #fff05a;
@@ -107,6 +126,9 @@ export const LeftMenu = styled.div`
   }
   .icon:hover {
     border-bottom: 0.3rem solid #fff;
+  }
+  .active {
+    border-bottom: 0.3rem solid #fff05a;
   }
   .active:hover {
     border-bottom: 0.3rem solid #fff05a;

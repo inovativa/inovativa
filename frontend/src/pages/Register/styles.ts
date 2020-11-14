@@ -49,10 +49,11 @@ export const LogoPageRegister = styled.div`
   }
 `;
 export const SubtitlePage = styled.h1`
-  font-size: 2.5rem;
+  font-size: 2rem;
   line-height: 3rem;
   color: #000;
-  font-weight: bold;
+  font: Signika;
+  font-weight: 500;
   transition: 0.2s;
 
   animation-duration: 2s;
@@ -67,20 +68,16 @@ export const SubtitlePage = styled.h1`
     }
   }
 `;
-export const ContainerForm = styled.form`
+export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   max-width: 65rem;
 
-  background: #ffffff;
   padding: 4rem;
-  border-radius: 0.8rem;
 
-  box-shadow: 3px 3px #ffffff;
-
-  margin-top: -2.8rem;
+  margin-top: 1rem;
 
   z-index: 1;
 
@@ -103,7 +100,7 @@ export const ProfileType = styled.div`
   label {
     cursor: pointer;
 
-    font: 1rem Bahnschrift;
+    font-size: 1rem;
     line-height: 2rem;
     text-align: center;
     color: #808080;

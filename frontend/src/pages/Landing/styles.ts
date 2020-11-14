@@ -1,102 +1,167 @@
 import styled from 'styled-components';
-import homeIconYellow from '../../assets/images/homeYellow.svg';
-import homeIconWhite from '../../assets/images/homeWhite.svg';
 
-export const MenubarStyles = styled.div`
+export const Container = styled.div`
   width: 100vw;
-  height: 4rem;
-  background: #191919;
+  height: 8rem;
   display: flex;
-  justify-content: center;
   align-items: center;
+  flex-direction: column;
+
+  main {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    width: 960px;
+    margin-top: 35px;
+  }
 `;
-export const ContainerStyles = styled.div`
-  width: 100%;
-  max-width: 60rem;
+export const Title = styled.div`
+  width: 960px;
   display: flex;
   justify-content: space-between;
+  margin-top: 2rem;
+  div {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+  }
+
+  .StatesOptions {
+    display: flex;
+    height: 4rem;
+    align-items: center;
+    max-width: 312px;
+    border-bottom: 3px solid #eedf3d;
+    & p {
+      color: #009ca0;
+    }
+    button {
+      outline: 0;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+    }
+    ul {
+      background: #fff6bb;
+      border-top: 2px solid #eedf3d;
+      width: 400px;
+      position: absolute;
+      margin-left: 0;
+      margin-top: 261px;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      max-height: 200px;
+      li {
+        height: 60px;
+        padding: 15px;
+        list-style: none;
+        text-align: left;
+        a {
+          text-align: left;
+          text-decoration: none;
+          color: #191919;
+          width: 100%;
+        }
+
+        &:hover {
+          background: #eedf3d;
+        }
+      }
+    }
+  }
+  .userOptions {
+    div {
+      width: 3px;
+      height: 70%;
+      margin-left: 20px;
+      margin-right: 20px;
+      background-color: #009ca0;
+    }
+    img {
+      height: 22px;
+      cursor: pointer;
+    }
+  }
+`;
+export const Artigos = styled.div``;
+export const ArtigoItem = styled.div`
+  display: grid;
+  grid-template-columns: 4fr 1fr;
 `;
 
-export const RigthMenu = styled.div`
+export const HeaderArtigo = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  .boxSearch {
+  justify-content: space-between;
+  .perfil {
     display: flex;
     align-items: center;
-    background-color: #fff;
-    border-radius: 0.6rem;
-    height: 2rem;
-    width: 18rem;
-    & svg {
-      margin-left: 0.3rem;
-      margin-right: 0.3rem;
+    img {
+      margin-right: 20px;
+      height: 39px;
+      width: 39px;
+      background-color: #ccc;
+      border-radius: 50%;
     }
-    & input {
-      width: calc(100% - 35px);
+    p {
+      font-size: 20px;
+      color: #535353;
+    }
+  }
+  span {
+    font-size: 20px;
+    color: #535353;
+  }
+`;
+export const InformationArtigo = styled.div`
+  body {
+    margin-top: 5px;
+    h3,
+    p {
+      font-size: 24px;
+      color: #191919;
+    }
+  }
+`;
+export const ImageArtigo = styled.div`
+margin-left: 25px;
+span {
+      font-size: 15px;
+    }
+    img{
+      height: 111px;
+      width: 164px;
+      margin-top: 27px;
+    }
+    button{
+      background: transparent;
       border: none;
       outline: 0;
-      overflow: hidden;
-      line-height: 1.8rem;
-      font-size: 1rem;
+      cursor: pointer;
     }
-  }
-  .avatar {
-    margin-left: 1.5rem;
-    height: 2.5rem;
-    width: 2.5rem;
-    border-radius: 50%;
-    background: #fff;
-    cursor: pointer;
-  }
-  .conectedIconContainer {
-    height: 100%;
-    width: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 1rem;
-  }
-  .conectedIconContainer:hover {
-    border-bottom: 0.3rem solid #fff;
-  }
-  .active:hover {
-    border-bottom: 0.3rem solid #fff05a;
-  }
-  .conectedIcon {
-    height: 1.5rem;
-    width: 1.5rem;
-    cursor: pointer;
-  }
+}
 `;
-export const LeftMenu = styled.div`
+export const Eventos = styled.div`
+  margin-left: 35px;
+`;
+export const TitleEvent = styled.h3`
+  color: #009ca0;
+  font-size: 48px;
+  text-align: center;
+  font-weight: 400;
+`;
+export const EventoItem = styled.div`
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  .logo {
-    max-width: 5rem;
-    transition: 0.2s;
-    cursor: pointer;
-  }
+  flex-direction: column;
 
-  ul {
-    display: flex;
-    margin-left: 3rem;
+  span {
+    font-size: 15px;
+    color: #535353;
   }
-  .icon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex: 1;
-    height: 4rem;
-    width: 3rem;
-    cursor: pointer;
-    transition: 0.2s;
+  & img {
+    width: 98px;
+    height: 33px;
+    margin-top: 10px;
   }
-  .icon:hover {
-    border-bottom: 0.3rem solid #fff;
-  }
-  .active:hover {
-    border-bottom: 0.3rem solid #fff05a;
+  p {
+    font-size: 18px;
   }
 `;
