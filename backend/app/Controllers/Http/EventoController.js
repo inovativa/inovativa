@@ -40,11 +40,8 @@ class EventoController {
                     address: item.address,
                     title: item.title,
                     description: item.description,
-                    dia: item.dia,
-                    mes: item.mes,
-                    ano: item.ano,
+                    date: item.dete,
                     hora: item.hora,
-                    minuto: item.minuto,
                     avatar: `http://localhost:3333/${item.avatar}`,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
@@ -70,11 +67,8 @@ class EventoController {
                     address: item.address,
                     title: item.title,
                     description: item.description,
-                    dia: item.dia,
-                    mes: item.mes,
-                    ano: item.ano,
+                    date: item.dete,
                     hora: item.hora,
-                    minuto: item.minuto,
                     avatar: `http://localhost:3333/${item.avatar}`,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
@@ -88,24 +82,21 @@ class EventoController {
     }
 
     async create({ params,request }) {
-        const {address, title, description,dia,mes,ano,hora,minuto} = request.all()
+        const {address, title, description,hora,data} = request.all()
         const validationOptions = {
             types: ['image'],
             size: '500mb',
             extnames: ['png', 'jpg', 'svg', 'gif', 'PNG', 'JPG', 'SVG', 'GIF']
         }
-        try {
+        //try {
         const avatars = request.file('file', validationOptions)
         var avatar = `event/${new Date().getTime()}.${avatars.extname}`
             const res = await Evento.create({
                 user_id:params.id,
                 avatar: avatar,
                 address: address,
-                dia: dia,
-                mes: mes,
-                ano: ano,
+                data: data,
                 hora: hora,
-                minuto: minuto,
                 title: title,
                 description: description
             })
@@ -116,9 +107,9 @@ class EventoController {
              
         if (!avatars.moved()) return avatars.error()
             return Response.response(res, 200, "cadastrado com sucesso")
-        } catch (err) {
+       /*  } catch (err) {
             return Response.response(err, 500, "error no cadastro")
-        }
+        } */
     }
   
    async delete({params}){ 
