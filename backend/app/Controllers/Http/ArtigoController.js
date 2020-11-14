@@ -6,14 +6,14 @@ const Artigo = use('App/Models/Artigo')
 
 class ArtigoController {
     async indexAll({params,request}){
-        try { 
+       // try { 
            const { uf }=request.all()
            if(uf==null){
             const res = await Database.select('*')
             .table('users')   
             .leftJoin("artigos", "users.id","artigos.user_id")
             .leftJoin("perfils", "users.perfil_id","perfils.id")
-            /* return res */
+            
             const list = res.map(item => {
                 return {
                     id:item.id,
@@ -32,8 +32,7 @@ class ArtigoController {
             const res = await Database.select('*')
             .table('users')   
             .leftJoin("artigos", "users.id","artigos.user_id")
-            .where('artigos.id','>',0)
-            .where('artigos.user_id',params.id)
+            .leftJoin("perfils", "users.perfil_id","perfils.id")
             .where("users.uf",uf)
             const list = res.map(item => {
                 return {
@@ -49,9 +48,9 @@ class ArtigoController {
                     }
           })
              return Response.response(list, 200, "cadastrado com sucesso")
-         } catch (err) {
+        /*  } catch (err) {
            return Response.response(err, 500, "error no cadastro")
-       } 
+       } */ 
    }
 
 
