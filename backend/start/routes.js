@@ -26,6 +26,7 @@ Route.post('/allUserStar','UserStarController.index')
 Route.post('/Userstar/:user_id','UserStarController.create')
 Route.post('/ListUserStar/:id','UserStarController.indexOne')
 
+Route.post('/artigo','ArtigoController.indexAll')
 Route.post('/artigo/:id','ArtigoController.index')
 Route.post('/createArtigo/:id','ArtigoController.create')
 Route.post('/OneArtigo/:id','ArtigoController.indexOne')

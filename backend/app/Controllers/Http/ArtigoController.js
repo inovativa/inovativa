@@ -5,6 +5,56 @@ const Response = use('App/Models/Response')
 const Artigo = use('App/Models/Artigo')
 
 class ArtigoController {
+    async indexAll({params,request}){
+        try { 
+           const { uf }=request.all()
+           if(uf==null){
+            const res = await Database.select('*')
+            .table('users')   
+            .leftJoin("artigos", "users.id","artigos.user_id")
+            .leftJoin("perfils", "users.perfil_id","perfils.id")
+            /* return res */
+            const list = res.map(item => {
+                return {
+                    id:item.id,
+                    date: item.created_at,
+                    nome_perfil: item.nome_perfil,
+                    username: item.username,
+                    title: item.title,
+                    description: item.description,
+                    subtitle: item.subtitle,
+                    avatar: `http://localhost:3333/${item.avatar}`,
+                    date: item.created_at
+                    }
+           })
+               return Response.response(list, 200, "cadastrado com sucesso")
+           }
+            const res = await Database.select('*')
+            .table('users')   
+            .leftJoin("artigos", "users.id","artigos.user_id")
+            .where('artigos.id','>',0)
+            .where('artigos.user_id',params.id)
+            .where("users.uf",uf)
+            const list = res.map(item => {
+                return {
+                    id:item.id,
+                    date: item.created_at,
+                    nome_perfil: item.nome_perfil,
+                    username: item.username,
+                    title: item.title,
+                    description: item.description,
+                    subtitle: item.subtitle,
+                    avatar: `http://localhost:3333/${item.avatar}`,
+                    date: item.created_at
+                    }
+          })
+             return Response.response(list, 200, "cadastrado com sucesso")
+         } catch (err) {
+           return Response.response(err, 500, "error no cadastro")
+       } 
+   }
+
+
     async index({params,request}){
         try { 
            const { uf }=request.all()
