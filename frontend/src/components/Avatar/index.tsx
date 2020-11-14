@@ -15,6 +15,7 @@ interface AvatarInterface {
   user?: UserInterface;
 }
 const Avatar: React.FC<AvatarInterface> = ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   image,
   route,
   user = {

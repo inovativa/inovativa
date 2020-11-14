@@ -18,6 +18,7 @@ export const TextArea: React.FC<TextAreaProps> = ({
   ...rest
 }) => {
   const textAreaRef = useRef(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { fieldName, defaultValue, error, registerField } = useField(name);
   useEffect(() => {
     registerField({
