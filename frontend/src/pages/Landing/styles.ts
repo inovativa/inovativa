@@ -181,7 +181,13 @@ export const EventoItem = styled.div`
     height: 97px;
     margin-top: 10px;
   }
-  p {
+  a {
     font-size: 18px;
+    text-decoration: none;
+    color: #000000;
+    margin-top: 15px;
+    &:hover {
+      color: #84e5e8;
+    }
   }
 `;

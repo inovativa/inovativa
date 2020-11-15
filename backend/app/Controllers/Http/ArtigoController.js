@@ -6,20 +6,16 @@ const Artigo = use('App/Models/Artigo')
 
 class ArtigoController {
     async indexAll({params,request}){
-<<<<<<< HEAD
-       // try {
            const { uf }=request.all()
            if(uf==null){
             const res = await Database.select('*')
             .table('users')
             .leftJoin("artigos", "users.id","artigos.user_id")
-=======
-        try { 
+        try {
            const { uf }=request.all()
            if(uf==null){
             const res = await Database.select('*')
-            .table('users')   
->>>>>>> c6df1b34aaa2df114404415c01098ab8b17e76fc
+            .table('users')
             .leftJoin("perfils", "users.perfil_id","perfils.id")
             .leftJoin("artigos", "users.id","artigos.user_id")
             .where('artigos.id','>',0)
@@ -41,12 +37,11 @@ class ArtigoController {
                return Response.response(list, 200, "cadastrado com sucesso")
            }
             const res = await Database.select('*')
-<<<<<<< HEAD
+
             .table('users')
             .leftJoin("artigos", "users.id","artigos.user_id")
-=======
-            .table('users')   
->>>>>>> c6df1b34aaa2df114404415c01098ab8b17e76fc
+
+            .table('users')
             .leftJoin("perfils", "users.perfil_id","perfils.id")
             .leftJoin("artigos", "users.id","artigos.user_id")
             .where('artigos.id','>',0)
@@ -69,11 +64,8 @@ class ArtigoController {
              return Response.response(list, 200, "cadastrado com sucesso")
            } catch (err) {
            return Response.response(err, 500, "error no cadastro")
-<<<<<<< HEAD
-       } */
-=======
-       } 
->>>>>>> c6df1b34aaa2df114404415c01098ab8b17e76fc
+       }
+       }
    }
 
 
@@ -134,20 +126,7 @@ class ArtigoController {
    }
     async indexOne({params}){
         try {
-<<<<<<< HEAD
             const{ id }=params
-           var item = await Artigo.find(id)
-           const data={
-                   user_id:item.user_id,
-                   title: item.title,
-                   description: item.description,
-                   subtitle: item.subtitle,
-                   avatar: `http://localhost:3333/${item.avatar}`,
-                   date: item.created_at
-                 }
-=======
-            const{ id }=params/* 
-           var item = await Artigo.find(id) */
            const item = await Database.select('*')
             .table('users')
             .leftJoin("perfils", "users.perfil_id","perfils.id")
@@ -169,7 +148,6 @@ class ArtigoController {
                     date: item.created_at
                     }
           })
->>>>>>> c6df1b34aaa2df114404415c01098ab8b17e76fc
            return Response.response(data, 200, "cadastrado com sucesso")
          } catch (err) {
            return Response.response(err, 500, "não existe dado cadastro!")

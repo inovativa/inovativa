@@ -23,6 +23,7 @@ import {
 import userEventImage from '../../assets/images/userEvents.svg';
 import apiUF from '../../services/apiUFs';
 import api from '../../services/api';
+import convertDate from '../../utils/convertDate';
 
 interface StateInterface {
   sigla: string;
@@ -49,8 +50,8 @@ interface EventosResponse {
   address: string;
   title: string;
   description: string;
-  avatar: string;
-  data: Date; // nã
+  avatar_evento: string;
+  data: string; // nã
   nome_perfil: string;
   username: string;
   hora: string;
@@ -218,9 +219,15 @@ const Landig: React.FC = () => {
               eventos.map(evento => (
                 <>
                   <EventoItem key={`${evento.id + evento.title}`}>
-                    <span>{` ${evento.hora}`} </span>
-                    <img src={evento.avatar} alt=" " />
-                    <p>{evento.title}</p>
+                    <span>
+                      {`${
+                        evento.data === undefined
+                          ? ''
+                          : convertDate(evento.data)
+                      }, ${evento.hora}`}{' '}
+                    </span>
+                    <img src={evento.avatar_evento} alt=" " />
+                    <Link to={`Evento/${evento.id}`}>{evento.title}</Link>
                   </EventoItem>
                 </>
               ))}
