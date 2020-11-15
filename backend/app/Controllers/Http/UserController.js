@@ -134,7 +134,7 @@ class UserController {
             const { email, password } = request.all()
             const res = await auth.attempt(email, password)
             const token = res.token;
-            const user = await User.find({email});
+            const user = await User.query().where('email',email).fetch();
             return Response.response({ token, user}, 200, "cadastrado com sucesso")
         } catch (err) {
             return Response.response(err, 400, "error no login")
