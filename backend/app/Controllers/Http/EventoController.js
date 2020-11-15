@@ -17,6 +17,9 @@ class EventoController {
             const list = res.map(item => {
                 return {
                     id:item.id,
+                    user_id:item.user_id,
+                    uf_user:item.uf,
+                    city:item.city,
                     address: item.address,
                     title: item.title,
                     data: item.data,
@@ -38,6 +41,8 @@ class EventoController {
                 const list = res.map(item => {
                 return {
                     id:item.id,
+                    uf_user:item.uf,
+                    city:item.city,
                     address: item.address,
                     title: item.title,
                     description: item.description,
@@ -65,6 +70,7 @@ class EventoController {
             const list = res.map(item => {
                 return {
                     id:item.id,
+                    user_id:item.user_id,
                     address: item.address,
                     title: item.title,
                     description: item.description,

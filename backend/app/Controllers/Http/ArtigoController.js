@@ -16,6 +16,7 @@ class ArtigoController {
             const list = res.map(item => {
                 return {
                     id:item.id,
+                    user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -38,6 +39,7 @@ class ArtigoController {
             const list = res.map(item => {
                 return {
                     id:item.id,
+                    user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -70,6 +72,7 @@ class ArtigoController {
             const list = res.map(item => {
                 return {
                     id:item.id,
+                    user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -91,6 +94,7 @@ class ArtigoController {
             const list = res.map(item => {
                 return {
                     id:item.id,
+                    user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -111,7 +115,8 @@ class ArtigoController {
             const{ id }=params
            var item = await Artigo.find(id)
            const data={
-                   id:item.id,
+            id:item.id,
+            user_id:item.user_id,
                    title: item.title,
                    description: item.description,
                    subtitle: item.subtitle,
