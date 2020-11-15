@@ -86,6 +86,7 @@ export const Artigos = styled.div``;
 export const ArtigoItem = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr;
+  margin-top: 50px;
 `;
 
 export const HeaderArtigo = styled.div`
@@ -156,9 +157,9 @@ export const EventoItem = styled.div`
     font-size: 15px;
     color: #535353;
   }
-  & img {
-    width: 98px;
-    height: 33px;
+  img {
+    width: 264px;
+    height: 97px;
     margin-top: 10px;
   }
   p {

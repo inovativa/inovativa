@@ -59,7 +59,7 @@ const CreateEvent: React.FC = () => {
         event.append('address', data.address);
         event.append('title', data.title);
         event.append('description', data.description);
-        event.append('date', String(data.date));
+        event.append('data', String(data.date));
         event.append('hora', data.hour);
         await api.post(`evento/${newUser.id}`, event);
         addToast({

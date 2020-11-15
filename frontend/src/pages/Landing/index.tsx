@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+/* eslint-disable react/jsx-one-expression-per-line */
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { HiLocationMarker } from 'react-icons/hi';
 import { RiArrowRightSLine } from 'react-icons/ri';
 import { IoIosArrowDown } from 'react-icons/io';
@@ -20,7 +21,6 @@ import {
   EventoItem,
 } from './styles';
 import userEventImage from '../../assets/images/userEvents.svg';
-import Select from '../../components/Select';
 import apiUF from '../../services/apiUFs';
 import api from '../../services/api';
 
@@ -31,7 +31,7 @@ interface StateInterface {
 
 interface ArtigosResponse {
   id: string;
-  date: Date;
+  data: Date;
   nome_perfil: string;
   username: string;
   title: string;
@@ -46,7 +46,7 @@ interface EventosResponse {
   title: string;
   description: string;
   avatar: string;
-  date: string;
+  data: string;
   nome_perfil: string;
   username: string;
   hora: string;
@@ -66,11 +66,11 @@ const Landig: React.FC = () => {
   useEffect(() => {
     api.post(`artigo`, {}).then(response => {
       const { data } = response.data;
-      console.log(response);
+      setArtigos(data);
     });
     api.post(`ListEvento`, {}).then(response => {
       const { data } = response.data;
-      console.log(response);
+      setEventos(data);
     });
   }, []);
 
@@ -84,9 +84,16 @@ const Landig: React.FC = () => {
     }
   }, [setStates, states]);
 
-  const handleSubmit = useCallback(() => {
-    /// ///Chamada da API
-  }, []);
+  const handleSubmitState = () => {
+    api.post(`ListEvento`, {}).then(response => {
+      const { data } = response.data;
+      setEventos(data);
+    });
+    api.post(`artigo`, {}).then(response => {
+      const { data } = response.data;
+      setArtigos(data);
+    });
+  };
   const handleFavorite = useCallback(() => {
     /// chamada da api
   }, []);
@@ -120,7 +127,9 @@ const Landig: React.FC = () => {
                 {states.map(state => {
                   return (
                     <li key={state.sigla}>
-                      <Link to="api">{state.sigla.toUpperCase()}</Link>
+                      <button type="submit" onClick={handleSubmitState}>
+                        {state.sigla.toUpperCase()}
+                      </button>
                     </li>
                   );
                 })}
@@ -141,51 +150,53 @@ const Landig: React.FC = () => {
         </Title>
         <main>
           <Artigos>
-            <ArtigoItem>
-              <InformationArtigo>
-                <HeaderArtigo>
-                  <div className="perfil">
-                    <img src="" alt="" />
-                    <p>
-                      <strong> Sala Verde </strong>
-                      <br />
-                      <span> Startup</span>
-                    </p>
-                  </div>
-                  <span>10 outubro, 2020</span>
-                </HeaderArtigo>
-                <body>
-                  <h3>
-                    Por que devemos criar uma rede de apoio entre os negócios
-                    locais?
-                  </h3>
-                  <p>O impacto da colaboração no desenvolvimento individual</p>
-                </body>
-              </InformationArtigo>
-              <ImageArtigo>
-                <HeaderArtigo>
-                  <span> Cambuí, MG</span>
-                  {!!user && (
-                    <button type="submit" onClick={handleFavorite}>
-                      <AiFillStar size={25} color="#C4C4C4" />
-                    </button>
-                  )}
-                </HeaderArtigo>
-                <img src="" alt="" />
-              </ImageArtigo>
-            </ArtigoItem>
+            {artigos &&
+              artigos.map(artigo => (
+                <ArtigoItem>
+                  <InformationArtigo>
+                    <HeaderArtigo>
+                      <div className="perfil">
+                        <img src={artigo.avatar} alt="" />
+                        <p>
+                          <strong>{artigo.username} </strong>
+                          <br />
+                          <span> {artigo.nome_perfil}</span>
+                        </p>
+                      </div>
+                      <span>{artigo.data}</span>
+                    </HeaderArtigo>
+                    <body>
+                      <h3>{artigo.title}</h3>
+                      <p>{artigo.description}</p>
+                    </body>
+                  </InformationArtigo>
+                  <ImageArtigo>
+                    <HeaderArtigo>
+                      <span> {artigo.description}</span>
+                      {!!user && (
+                        <button type="submit" onClick={handleFavorite}>
+                          <AiFillStar size={25} color="#C4C4C4" />
+                        </button>
+                      )}
+                    </HeaderArtigo>
+                    <img src={artigo.avatar} alt="" />
+                  </ImageArtigo>
+                </ArtigoItem>
+              ))}
           </Artigos>
-          {eventos.length &&
-            eventos.map(evento => (
-              <Eventos>
-                <TitleEvent>eventos</TitleEvent>
-                <EventoItem>
-                  <span> </span>
-                  <img src={evento.avatar} alt=" " />
-                  <p>{evento.title}</p>
-                </EventoItem>
-              </Eventos>
-            ))}
+          <Eventos>
+            <TitleEvent>eventos</TitleEvent>
+            {eventos &&
+              eventos.map(evento => (
+                <>
+                  <EventoItem>
+                    <span>{evento.data} </span>
+                    <img src={evento.avatar} alt=" " />
+                    <p>{evento.title}</p>
+                  </EventoItem>
+                </>
+              ))}
+          </Eventos>
         </main>
       </Container>
     </>

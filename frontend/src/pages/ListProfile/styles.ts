@@ -86,6 +86,7 @@ export const Profiles = styled.div``;
 export const ArtigoItem = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr;
+  margin-top: 80px;
 `;
 
 export const HeaderArtigo = styled.div`

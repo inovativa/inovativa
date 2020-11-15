@@ -9,7 +9,7 @@ class UserController {
     async index({request}) {
        try {
             const { uf } = request.all()
-            
+
          if (uf == null) {
             const res = await Database.select('*')
                 .table('perfils')
@@ -42,7 +42,7 @@ class UserController {
                 .table('perfils')
                 .leftJoin("users", "perfils.id", "users.perfil_id")
                 .where('users.id', '>', 0)
-                .where("users.uf",uf) 
+                .where("users.uf",uf)
             const list = res.map(item => {
                 return {
                     id: item.id,
@@ -67,7 +67,7 @@ class UserController {
             return Response.response(list, 200, "cadastrado com sucesso")
           } catch (err) {
             return Response.response(err, 500, "error no cadastro")
-        } 
+        }
     }
 
     async showOne({ params,request }) {
@@ -94,7 +94,9 @@ class UserController {
                     uf: item.uf,
                     interesse: item.interesse,
                     avatar_front: `http://localhost:3333/${item.avatar_front}`,
+                    avatar_front_old: item.avatar_front,
                     avatar_back: `http://localhost:3333/${item.avatar_back}`,
+                    avatar_back_old:item.avatar_back,
                     date: item.created_at
                 }
             })
@@ -172,22 +174,22 @@ class UserController {
 
     async uploadFront({ params, request, response }) {
         const {id} = params
-        
+
         const validationOptions = {
             types: ['image'],
             size: '500mb',
             extnames: ['png', 'jpg', 'svg', 'gif', 'PNG', 'JPG', 'SVG', 'GIF']
         }
-          const {old_file}=request.all()
-          
+          const {old}=request.all()
+
         try {
             const data = await User.find(id)
         const avatars = request.file('file', validationOptions)
         var avatar = `front/${new Date().getTime()}.${avatars.extname}`
            var exists = Helpers.promisify(require('fs').exists)
 
-             exists(Helpers.tmpPath(old_file),async(res)=>{
-                 if(res==true){ 
+             exists(Helpers.tmpPath(old),async(res)=>{
+                 if(res==true){
                     const fs = Helpers.promisify(require('fs'))
                     await fs.unlink(Helpers.tmpPath(old_file))
                     await avatars.move(Helpers.tmpPath(), {
@@ -199,23 +201,23 @@ class UserController {
                      name: avatar,
                      overwrite: true
                   })
-               } 
-            }) 
+               }
+            })
 
          await data.merge({
              avatar_front: avatar
          })
          var res = await data.save()
-       
+
         if (!avatars.moved()) return avatars.error()
-        
+
         return Response.response(res, 200, "cadastrado com sucesso")
 
         } catch (error) {
             return error
         }
-        
-   
+
+
     }
 
     async uploadBack({ params, request, response }) {
@@ -233,7 +235,7 @@ class UserController {
 
             var exists = Helpers.promisify(require('fs').exists)
             exists(Helpers.tmpPath(old_file),async(res)=>{
-                if(res==true){ 
+                if(res==true){
                     const fs = Helpers.promisify(require('fs'))
                     await fs.unlink(Helpers.tmpPath(old_file))
                     await avatars.move(Helpers.tmpPath(), {
@@ -245,19 +247,19 @@ class UserController {
                         name: avatar,
                         overwrite: true
                     })
-                } 
-            }) 
+                }
+            })
             await data.merge({
                 avatar_back: avatar
             })
             var res = await data.save()
             if (!avatars.moved()) return avatars.error()
             return Response.response(res, 200, "cadastrado com sucesso")
-        
+
         }catch (error) {
             return Response.response(error, 500, "erro de cadastro")
         }
-    }     
+    }
 
 }
 

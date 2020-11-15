@@ -7,39 +7,36 @@ import { useAuth } from '../../hooks/AuthContext';
 interface UserInterface {
   id: string;
   avatar_front?: string;
+  avatar_front_old?: string;
 }
 interface AvatarInterface {
   route: string;
   image: string;
   // eslint-disable-next-line react/require-default-props
-  user?: UserInterface;
 }
 const Avatar: React.FC<AvatarInterface> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   image,
   route,
-  user = {
-    id: '',
-    avatar_front: '',
-  },
 }: AvatarInterface) => {
-  const { refreshUser } = useAuth();
+  const { refreshUser, user } = useAuth();
+  const newUser = user as UserInterface;
   const handleAvatarChange = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
         const data = new FormData();
-
         data.append('file', e.target.files[0]);
+        data.append('old', String(newUser.avatar_front_old));
 
-        await api.post(route, data);
-        refreshUser(user.id);
+        await api.post(`/filesFront/${newUser.id}`, data);
+        refreshUser(newUser.id);
       }
     },
-    [route, refreshUser, user],
+    [route, refreshUser, newUser],
   );
   return (
     <AvatarInput>
-      <ImageAvatar src={user.avatar_front} />
+      <ImageAvatar src={newUser.avatar_front} />
       <LabelStyles htmlFor="avatar">
         <AiOutlinePlusCircle />
         <input

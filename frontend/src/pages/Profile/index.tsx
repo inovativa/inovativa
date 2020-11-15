@@ -82,9 +82,6 @@ const Register: React.FC = () => {
             'Campo empresa/startup é obrigatório.',
           ),
           interesse: Yup.string().required('Campo interesse é obrigatório.'),
-          perfil_id: Yup.number().required(
-            'Informe seu perfil startup, empresa, investidor ou mentor.',
-          ),
         });
         await schema.validate(values, {
           abortEarly: false,
@@ -131,7 +128,6 @@ const Register: React.FC = () => {
               newUser.avatar_front === undefined ? '' : newUser.avatar_front
             }
             route={`/filesFront/${newUser.id}`}
-            user={{ id, avatar_front: newUser.avatar_front }}
           />
         </CoverInput>
 

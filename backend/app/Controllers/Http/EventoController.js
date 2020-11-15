@@ -83,7 +83,6 @@ class EventoController {
 
     async create({ params,request }) {
         const {address, title, description,hora,data} = request.all()
-        const {address, title, description,date, hora} = request.all()
         const validationOptions = {
             types: ['image'],
             size: '500mb',
@@ -91,17 +90,14 @@ class EventoController {
         }
         //try {
         const avatars = request.file('file', validationOptions)
-        console.log(request.file);
         var avatar = `event/${new Date().getTime()}.${avatars.extname}`
             const res = await Evento.create({
                 user_id:params.id,
                 avatar: avatar,
                 address: address,
-                data: data,
-                hora: hora,
                 title: title,
                 description: description,
-                data: date,
+                data: data,
                 hora: hora
             })
             await avatars.move(Helpers.tmpPath(), {
