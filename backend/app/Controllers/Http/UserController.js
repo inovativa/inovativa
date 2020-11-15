@@ -130,15 +130,20 @@ class UserController {
     }
 
     async login({ request, auth }) {
-        try {
+        //try {
             const { email, password } = request.all()
             const res = await auth.attempt(email, password)
             const token = res.token;
-            const user = await User.query().where('email',email).fetch();
-            return Response.response({ token, user}, 200, "cadastrado com sucesso")
-        } catch (err) {
+            var user = await Database.select('*')
+                .table('users')
+                .where('email',email)
+           for(var data of user){
+                return Response.response({ token,data}, 200, "cadastrado com sucesso")
+             }
+          
+        /* } catch (err) {
             return Response.response(err, 400, "error no login")
-        }
+        } */
     }
 
     async update({request,params}) {
