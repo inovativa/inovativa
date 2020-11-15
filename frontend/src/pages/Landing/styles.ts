@@ -98,6 +98,12 @@ export const ArtigoItem = styled.div`
 export const HeaderArtigo = styled.div`
   display: flex;
   justify-content: space-between;
+  a:hover {
+    strong,
+    span {
+      color: #84e5e8;
+    }
+  }
   .perfil {
     display: flex;
     align-items: center;

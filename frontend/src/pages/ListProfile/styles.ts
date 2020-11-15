@@ -25,6 +25,7 @@ export const Title = styled.div`
 
   .StatesOptions {
     display: flex;
+    align-items: center;
     height: 4rem;
     align-items: center;
     max-width: 312px;
@@ -33,6 +34,8 @@ export const Title = styled.div`
       color: #009ca0;
     }
     button {
+      display: flex;
+      align-items: center;
       outline: 0;
       border: 0;
       background: transparent;

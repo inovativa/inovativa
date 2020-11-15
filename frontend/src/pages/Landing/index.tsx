@@ -41,6 +41,7 @@ interface ArtigosResponse {
   avatar_user: string; /// Não tem
   uf_user: string; // não tem
   city: string; // não tem
+  user_id: string;
 }
 
 interface EventosResponse {
@@ -182,7 +183,7 @@ const Landig: React.FC = () => {
                 <ArtigoItem key={`${artigo.id + artigo.title}`}>
                   <InformationArtigo>
                     <HeaderArtigo>
-                      <Link to={`/Perfil/${artigo.id}`} className="perfil">
+                      <Link to={`/Perfil/${artigo.user_id}`} className="perfil">
                         <img src={artigo.avatar_user} alt="" />
                         <p>
                           <strong>{artigo.username} </strong>

@@ -11,6 +11,7 @@ import Profile from '../pages/Profile/index';
 import ListProfile from '../pages/ListProfile';
 import Perfil from '../pages/Perfil';
 import Artigo from '../pages/Artigo';
+import Evento from '../pages/Evento';
 
 const Routes: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const Routes: React.FC = () => {
       <Route path="/ListProfile" component={ListProfile} />
       <Route path="/Artigo/:id" component={Artigo} />
       <Route path="/Perfil/:id" component={Perfil} />
+      <Route path="/Evento/:id" component={Evento} />
     </Switch>
   );
 };
