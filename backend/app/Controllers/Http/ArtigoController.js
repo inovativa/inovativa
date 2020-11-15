@@ -21,6 +21,7 @@ class ArtigoController {
             .where('artigos.id','>',0)
             const list = res.map(item => {
                 return {
+                    id:item.id,
                     user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
@@ -48,6 +49,7 @@ class ArtigoController {
             .where("users.uf",uf)
             const list = res.map(item => {
                 return {
+                    id:item.id,
                     user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
@@ -82,6 +84,7 @@ class ArtigoController {
             .where('artigos.user_id',params.id)
             const list = res.map(item => {
                 return {
+                    id:item.id,
                     user_id:item.iuser_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
@@ -106,6 +109,7 @@ class ArtigoController {
             .where("users.uf",uf)
             const list = res.map(item => {
                 return {
+                    id:item.id,
                     user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
