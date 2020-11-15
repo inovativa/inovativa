@@ -53,3 +53,7 @@ Route.get('/event/:id',async({params,response})=>{
     return response.download(Helpers.tmpPath(photos))
 })
 
+//chat realtime
+
+Route.post('/rooms', 'RoomController.create')
+Route.post('/rooms/:id', 'RoomController.createMessage')

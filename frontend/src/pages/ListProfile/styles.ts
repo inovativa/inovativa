@@ -8,8 +8,6 @@ export const Container = styled.div`
   flex-direction: column;
 
   main {
-    display: grid;
-    grid-template-columns: 3fr 1fr;
     width: 960px;
     margin-top: 35px;
   }
@@ -84,93 +82,41 @@ export const Title = styled.div`
 `;
 export const Profiles = styled.div`
   display: flex;
-  flex-direction: column;
   width: 100%;
+  margin-top: 40px;
   img {
     height: 120px;
     width: 120px;
     border-radius: 50%;
   }
-`;
-export const ArtigoItem = styled.div`
-  display: grid;
-  grid-template-columns: 4fr 1fr;
-  margin-top: 80px;
-`;
-
-export const HeaderArtigo = styled.div`
-  display: flex;
-  justify-content: space-between;
-  .perfil {
-    display: flex;
-    align-items: center;
-    img {
-      margin-right: 20px;
-      height: 39px;
-      width: 39px;
-      background-color: #ccc;
-      border-radius: 50%;
-    }
+  div {
+    margin-left: 45px;
     p {
-      font-size: 20px;
-      color: #535353;
+      font-size: 18px;
+      line-height: 21px;
+      color: #808080;
     }
-  }
-  span {
-    font-size: 20px;
-    color: #535353;
-  }
-`;
-export const InformationArtigo = styled.div`
-  body {
-    margin-top: 5px;
-    h3,
-    p {
-      font-size: 24px;
+    h3 {
+      font-size: 30px;
+      line-height: 19px;
       color: #191919;
+      font-weight: 400;
+    }
+    span {
+      font-size: 15px;
+      line-height: 21px;
+      color: #808080;
     }
   }
 `;
-export const ImageArtigo = styled.div`
-  margin-left: 25px;
-  span {
-    font-size: 15px;
-  }
-  img {
-    height: 111px;
-    width: 164px;
-    margin-top: 27px;
-  }
-  button {
-    background: transparent;
-    border: none;
-    outline: 0;
-    cursor: pointer;
-  }
-`;
-export const Eventos = styled.div`
-  margin-left: 35px;
-`;
-export const TitleEvent = styled.h3`
-  color: #009ca0;
-  font-size: 48px;
-  text-align: center;
-  font-weight: 400;
-`;
-export const EventoItem = styled.div`
-  display: flex;
-  flex-direction: column;
 
-  span {
-    font-size: 15px;
-    color: #535353;
-  }
-  & img {
-    width: 98px;
-    height: 33px;
-    margin-top: 10px;
-  }
-  p {
-    font-size: 18px;
-  }
+export const City = styled.span`
+  position: absolute;
+  text-align: right;
+  font-size: 15px;
+  line-height: 18px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: #868686;
 `;

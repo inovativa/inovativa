@@ -10,10 +10,8 @@ import { useAuth } from '../../hooks/AuthContext';
 import {
   Container,
   Title,
-  Eventos,
-  TitleEvent,
-  EventoItem,
   Profiles,
+  City,
 } from './styles';
 import userEventImage from '../../assets/images/userEventImageDisable.svg';
 import apiUF from '../../services/apiUFs';
@@ -28,12 +26,12 @@ interface UserInterface {
   id: string;
 }
 interface ProfileInterface {
-  avatar: string;
+  avatar_front: string;
   username: string;
   nome_perfil: string;
   city: string;
   uf: string;
-  description: string;
+  descricao_empresa: string;
 }
 const ListProfile: React.FC = () => {
   const [uf, setUf] = useState<string>();
@@ -47,12 +45,13 @@ const ListProfile: React.FC = () => {
     },
   ]);
   useEffect(()=>{
-    api.post(`artigo`, {}).then(response => {
+    api.post(`list`, {}).then(response => {
       const { data } = response.data;
       setProfiles(data);
     });
+    setUf('Todos')
 
-  },[setProfiles])
+  },[setProfiles, newUser])
 
   const handleStates = useCallback(() => {
     if (states.length === 1) {
@@ -65,11 +64,11 @@ const ListProfile: React.FC = () => {
   }, [setStates, states]);
 
   const handleSubmitState = useCallback((newUf: string) => {
-    api.post(`artigo`, {}).then(response => {
+    api.post(`list`, {uf: newUf}).then(response => {
       const { data } = response.data;
       setProfiles(data);
     });
-    setUf(newUf);
+    setUf(newUf === "" ? 'Todos' : newUf) ;
     setStates([]);
   }, [setProfiles]);
   const handleFavorite = useCallback(() => {
@@ -88,14 +87,16 @@ const ListProfile: React.FC = () => {
               { uf }
             </p>
             <button type="submit" onClick={handleStates}>
-              {states.length === 1 ? (
-                <RiArrowRightSLine
+              {states.length > 1 ? (
+
+                <IoIosArrowDown
                   size={35}
                   color="#009CA0"
                   style={{ cursor: 'pointer' }}
                 />
+
               ) : (
-                <IoIosArrowDown
+                <RiArrowRightSLine
                   size={35}
                   color="#009CA0"
                   style={{ cursor: 'pointer' }}
@@ -104,6 +105,16 @@ const ListProfile: React.FC = () => {
             </button>
             {states.length > 1 && (
               <ul>
+                <li key="null">
+                  <button
+                    type="button"
+                    onClick={() => {
+                          handleSubmitState("");
+                        }}
+                  >
+                    Todos
+                  </button>
+                </li>
                 {states.map(state => {
                   return (
                     <li key={state.sigla}>
@@ -138,7 +149,13 @@ const ListProfile: React.FC = () => {
             profiles &&
             profiles.map( profile => (
               <Profiles>
-                <img src={profile.avatar} alt="Perfil" />
+                <img src={profile.avatar_front} alt="Perfil" />
+                <div>
+                  <h3>{profile.username}</h3>
+                  <span>{profile.nome_perfil}</span>
+                  <p>{profile.descricao_empresa}</p>
+                </div>
+                <City>{`${profile.city}, ${profile.uf}`}</City>
               </Profiles>
             ))
           }

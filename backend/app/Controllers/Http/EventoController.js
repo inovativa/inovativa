@@ -19,7 +19,7 @@ class EventoController {
                     id:item.id,
                     address: item.address,
                     title: item.title,
-                    data: item.deta,
+                    data: item.data,
                     hora: item.hora,
                     description: item.description,
                     avatar: `http://localhost:3333/${item.avatar}`,
@@ -41,7 +41,7 @@ class EventoController {
                     address: item.address,
                     title: item.title,
                     description: item.description,
-                    data: item.deta,
+                    data: item.data,
                     hora: item.hora,
                     avatar: `http://localhost:3333/${item.avatar}`,
                     date: item.created_at,
@@ -50,7 +50,7 @@ class EventoController {
                 }
         })
                 return Response.response(list, 200, "cadastrado com sucesso")
-        } catch (err) {
+          } catch (err) {
             return Response.response(err, 500, "error no cadastro")
         }
     }
@@ -68,7 +68,7 @@ class EventoController {
                     address: item.address,
                     title: item.title,
                     description: item.description,
-                    date: item.dete,
+                    data: item.data,
                     hora: item.hora,
                     avatar: `http://localhost:3333/${item.avatar}`,
                     date: item.created_at,
@@ -89,7 +89,7 @@ class EventoController {
             size: '500mb',
             extnames: ['png', 'jpg', 'svg', 'gif', 'PNG', 'JPG', 'SVG', 'GIF']
         }
-        //try {
+    try {
         const avatars = request.file('file', validationOptions)
         var avatar = `event/${new Date().getTime()}.${avatars.extname}`
             const res = await Evento.create({
@@ -108,10 +108,9 @@ class EventoController {
 
         if (!avatars.moved()) return avatars.error()
             return Response.response(res, 200, "cadastrado com sucesso")
-       /*  } catch (err) {
-        /* } catch (err) {
+         } catch (err) {
             return Response.response(err, 500, "error no cadastro")
-        } */
+        }
     }
 
    async delete({params}){

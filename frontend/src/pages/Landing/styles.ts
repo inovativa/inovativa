@@ -125,6 +125,7 @@ export const InformationArtigo = styled.div`
     p {
       font-size: 24px;
       color: #191919;
+      line-height: 28px;
     }
     p {
       color: #808080;

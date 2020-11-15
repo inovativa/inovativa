@@ -38,7 +38,7 @@ interface ArtigosResponse {
   description: string;
   subtitle: string;
   avatar: string;
-  avatar_usuario: string; /// Não tem
+  avatar_user: string; /// Não tem
   uf_user: string; // não tem
   city: string; // não tem
 }
@@ -49,7 +49,7 @@ interface EventosResponse {
   title: string;
   description: string;
   avatar: string;
-  data: string; // nã
+  data: Date; // nã
   nome_perfil: string;
   username: string;
   hora: string;
@@ -81,7 +81,7 @@ const Landig: React.FC = () => {
       const { data } = response.data;
       setEventos(data);
     });
-    setUf(newUser.uf);
+    setUf('Todos');
   }, [newUser]);
 
   const handleStates = useCallback(() => {
@@ -95,15 +95,15 @@ const Landig: React.FC = () => {
   }, [setStates, states]);
 
   const handleSubmitState = (newUf: string) => {
-    api.post(`ListEvento`, {}).then(response => {
+    api.post(`ListEvento`, { uf: newUf }).then(response => {
       const { data } = response.data;
       setEventos(data);
     });
-    api.post(`artigo`, {}).then(response => {
+    api.post(`artigo`, { uf: newUf }).then(response => {
       const { data } = response.data;
       setArtigos(data);
     });
-    setUf(newUf);
+    setUf(newUf === '' ? 'Todos' : newUf);
     setStates([]);
   };
   const handleFavorite = useCallback(() => {
@@ -136,6 +136,16 @@ const Landig: React.FC = () => {
             </button>
             {states.length > 1 && (
               <ul>
+                <li key="null">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleSubmitState('');
+                    }}
+                  >
+                    Todos
+                  </button>
+                </li>
                 {states.map(state => {
                   return (
                     <li key={state.sigla}>
@@ -173,7 +183,7 @@ const Landig: React.FC = () => {
                   <InformationArtigo>
                     <HeaderArtigo>
                       <div className="perfil">
-                        <img src={artigo.avatar_usuario} alt="" />
+                        <img src={artigo.avatar_user} alt="" />
                         <p>
                           <strong>{artigo.username} </strong>
                           <br />
@@ -184,12 +194,12 @@ const Landig: React.FC = () => {
                     </HeaderArtigo>
                     <body>
                       <h3>{artigo.title}</h3>
-                      <p>{artigo.description}</p>
+                      <p>{artigo.subtitle}</p>
                     </body>
                   </InformationArtigo>
                   <ImageArtigo>
                     <HeaderArtigo>
-                      <span> {`${artigo.city}, ${artigo.uf_user}`}</span>
+                      <span> {`${artigo.uf_user}`}</span>
                       {!!user && (
                         <button type="submit" onClick={handleFavorite}>
                           <AiFillStar size={25} color="#C4C4C4" />
@@ -207,7 +217,7 @@ const Landig: React.FC = () => {
               eventos.map(evento => (
                 <>
                   <EventoItem key={`${evento.id + evento.title}`}>
-                    <span>{`${evento.data}, ${evento.hora}`} </span>
+                    <span>{` ${evento.hora}`} </span>
                     <img src={evento.avatar} alt=" " />
                     <p>{evento.title}</p>
                   </EventoItem>
