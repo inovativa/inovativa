@@ -32,7 +32,7 @@ interface StateInterface {
 
 interface ArtigosResponse {
   id: string;
-  date: Date; /// / Está retornando nulo
+  date: string; /// / Está retornando nulo
   nome_perfil: string;
   username: string;
   title: string;
@@ -192,7 +192,11 @@ const Landig: React.FC = () => {
                           <span> {artigo.nome_perfil}</span>
                         </p>
                       </Link>
-                      <span>{artigo.date}</span>
+                      <span>
+                        {artigo.date === undefined
+                          ? ''
+                          : convertDate(artigo.date)}
+                      </span>
                     </HeaderArtigo>
                     <body>
                       <h3>{artigo.title}</h3>
@@ -224,7 +228,7 @@ const Landig: React.FC = () => {
                         evento.data === undefined
                           ? ''
                           : convertDate(evento.data)
-                      }, ${evento.hora}`}{' '}
+                      }, ${evento.hora}`}
                     </span>
                     <img src={evento.avatar_evento} alt=" " />
                     <Link to={`Evento/${evento.id}`}>{evento.title}</Link>
