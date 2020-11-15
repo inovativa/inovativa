@@ -39,6 +39,11 @@ const Login: React.FC = () => {
           email: data.email,
           password: data.password,
         });
+        addToast({
+          type: 'success',
+          title: 'Usuário Logado com sucesso!',
+          description: 'Usuário Logado.',
+        });
         history.push('/landing');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {

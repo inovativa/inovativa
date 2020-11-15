@@ -6,16 +6,16 @@ const Artigo = use('App/Models/Artigo')
 
 class ArtigoController {
     async indexAll({params,request}){
-       // try { 
+       // try {
            const { uf }=request.all()
            if(uf==null){
             const res = await Database.select('*')
-            .table('users')   
+            .table('users')
             .leftJoin("artigos", "users.id","artigos.user_id")
             .leftJoin("perfils", "users.perfil_id","perfils.id")
             const list = res.map(item => {
                 return {
-                    id:item.id,
+                    user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -31,13 +31,13 @@ class ArtigoController {
                return Response.response(list, 200, "cadastrado com sucesso")
            }
             const res = await Database.select('*')
-            .table('users')   
+            .table('users')
             .leftJoin("artigos", "users.id","artigos.user_id")
             .leftJoin("perfils", "users.perfil_id","perfils.id")
             .where("users.uf",uf)
             const list = res.map(item => {
                 return {
-                    id:item.id,
+                    user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -53,7 +53,7 @@ class ArtigoController {
              return Response.response(list, 200, "cadastrado com sucesso")
         /*  } catch (err) {
            return Response.response(err, 500, "error no cadastro")
-       } */ 
+       } */
    }
 
 
@@ -69,7 +69,7 @@ class ArtigoController {
             .where('artigos.user_id',params.id)
             const list = res.map(item => {
                 return {
-                    id:item.id,
+                    user_id:item.iuser_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -90,7 +90,7 @@ class ArtigoController {
             .where("users.uf",uf)
             const list = res.map(item => {
                 return {
-                    id:item.id,
+                    user_id:item.user_id,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -111,7 +111,7 @@ class ArtigoController {
             const{ id }=params
            var item = await Artigo.find(id)
            const data={
-                   id:item.id,
+                   user_id:item.user_id,
                    title: item.title,
                    description: item.description,
                    subtitle: item.subtitle,

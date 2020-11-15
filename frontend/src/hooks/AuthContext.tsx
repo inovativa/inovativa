@@ -51,14 +51,8 @@ export const AuthProvider: React.FC = ({ children }) => {
   const refreshUser = useCallback(
     async (id: string) => {
       const response = await api.post(`/list/${id}`);
-      setData({
-        token: data.token,
-        user: response.data.data,
-      });
-      localStorage.setItem(
-        '@Inovativa:user',
-        JSON.stringify(response.data.data),
-      );
+      const user = response.data.data;
+      localStorage.setItem('@Inovativa:user', JSON.stringify(user));
     },
     [data.token],
   );

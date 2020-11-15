@@ -182,14 +182,14 @@ const Landig: React.FC = () => {
                 <ArtigoItem key={`${artigo.id + artigo.title}`}>
                   <InformationArtigo>
                     <HeaderArtigo>
-                      <div className="perfil">
+                      <Link to={`/Perfil/${artigo.id}`} className="perfil">
                         <img src={artigo.avatar_user} alt="" />
                         <p>
                           <strong>{artigo.username} </strong>
                           <br />
                           <span> {artigo.nome_perfil}</span>
                         </p>
-                      </div>
+                      </Link>
                       <span>{artigo.date}</span>
                     </HeaderArtigo>
                     <body>

@@ -82,8 +82,8 @@ export const Title = styled.div`
 `;
 export const Profiles = styled.div`
   display: flex;
-  width: 100%;
   margin-top: 40px;
+  align-items: center;
   img {
     height: 120px;
     width: 120px;
@@ -111,12 +111,12 @@ export const Profiles = styled.div`
 `;
 
 export const City = styled.span`
-  position: absolute;
+  position: relative;
   text-align: right;
   font-size: 15px;
   line-height: 18px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
   color: #868686;
 `;

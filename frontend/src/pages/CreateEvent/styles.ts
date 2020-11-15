@@ -44,6 +44,7 @@ export const Image = styled.div`
   background: #bdbdbdbd;
   width: 700px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   transition: 0.2s;
@@ -52,6 +53,9 @@ export const Image = styled.div`
     height: 50px;
 
     cursor: pointer;
+  }
+  input {
+    display: none;
   }
 `;
 export const GroupHorario = styled.div`

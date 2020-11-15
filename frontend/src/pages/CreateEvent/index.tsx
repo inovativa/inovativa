@@ -1,8 +1,10 @@
-import React, { ChangeEvent, useCallback, useRef } from 'react';
+import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import { SiAddthis } from 'react-icons/si';
+import { ImCheckmark } from 'react-icons/im';
+import { useHistory } from 'react-router-dom';
 import NavBar from '../../components/NavBar';
 import {
   Container,
@@ -33,14 +35,17 @@ interface UserInterface {
 }
 const CreateEvent: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
+  const [image, setImage] = useState<FormData>();
   const { user } = useAuth();
   const { addToast } = useToast();
   const newUser = user as UserInterface;
   const event = new FormData();
+  const history = useHistory();
 
   const handleChangeImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       event.append('file', e.target.files[0]);
+      setImage(event);
     }
   };
   const handleSubmit = useCallback(
@@ -67,6 +72,7 @@ const CreateEvent: React.FC = () => {
           title: 'Evento criado com sucesso',
           description: 'Evento criado com sucesso.',
         });
+        history.push('/landing');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -81,7 +87,7 @@ const CreateEvent: React.FC = () => {
         });
       }
     },
-    [formRef, newUser, addToast, getValidationErrors, event],
+    [formRef, newUser, addToast, getValidationErrors, event, history],
   );
   return (
     <>
@@ -93,8 +99,20 @@ const CreateEvent: React.FC = () => {
           </Title>
           <Form ref={formRef} onSubmit={handleSubmit}>
             <Image>
-              <SiAddthis size={35} color="ffffff" />
-              <input type="file" name="file" onChange={handleChangeImage} />
+              <label htmlFor="file">
+                {image ? (
+                  <ImCheckmark size={35} color="#009ca0" />
+                ) : (
+                  <SiAddthis size={35} color="#ffffff" />
+                )}
+              </label>
+              <input
+                type="file"
+                name="file"
+                id="file"
+                accept="image/png, image/jpeg"
+                onChange={handleChangeImage}
+              />
             </Image>
             <GroupHorario>
               <Input label="Data" name="date" type="date" />

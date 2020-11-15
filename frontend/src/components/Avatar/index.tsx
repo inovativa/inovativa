@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
 import { AvatarInput, ImageAvatar, LabelStyles } from './styles';
 import api from '../../services/api';
@@ -20,23 +20,29 @@ const Avatar: React.FC<AvatarInterface> = ({
   route,
 }: AvatarInterface) => {
   const { refreshUser, user } = useAuth();
-  const newUser = user as UserInterface;
+  const [newUser, setNewUser] = useState<UserInterface>();
+  const userInitial = user as UserInterface;
+  useEffect(() => {
+    setNewUser(userInitial);
+  }, []);
   const handleAvatarChange = useCallback(
     async (e: ChangeEvent<HTMLInputElement>) => {
       if (e.target.files) {
         const data = new FormData();
         data.append('file', e.target.files[0]);
-        data.append('old', String(newUser.avatar_front_old));
-
-        await api.post(`/filesFront/${newUser.id}`, data);
-        refreshUser(newUser.id);
+        data.append('old', String(newUser?.avatar_front_old));
+        await api.post(`/filesFront/${newUser?.id}`, data);
+        const response = await api.post(`/list/${newUser?.id}`);
+        const userAlter = response.data.data;
+        setNewUser(userAlter);
+        refreshUser(userAlter.id);
       }
     },
     [route, refreshUser, newUser],
   );
   return (
     <AvatarInput>
-      <ImageAvatar src={newUser.avatar_front} />
+      <ImageAvatar src={newUser?.avatar_front} />
       <LabelStyles htmlFor="avatar">
         <AiOutlinePlusCircle />
         <input

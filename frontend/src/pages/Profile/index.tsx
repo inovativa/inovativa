@@ -43,7 +43,6 @@ interface StateInterface {
 const Register: React.FC = () => {
   const { user, refreshUser } = useAuth();
   const { password, id, perfil_id } = user as UserInterface;
-  user as UserInterface;
   const newUser = user as UserInterface;
   newUser.confirmPassword = password;
   const { addToast } = useToast();

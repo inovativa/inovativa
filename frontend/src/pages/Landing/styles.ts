@@ -112,6 +112,8 @@ export const HeaderArtigo = styled.div`
       font-size: 20px;
       color: #535353;
     }
+    text-decoration: none;
+    cursor: pointer;
   }
   span {
     font-size: 20px;
