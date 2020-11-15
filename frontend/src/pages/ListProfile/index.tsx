@@ -32,6 +32,7 @@ interface ProfileInterface {
   city: string;
   uf: string;
   descricao_empresa: string;
+  id: string;
 }
 const ListProfile: React.FC = () => {
   const [uf, setUf] = useState<string>();
@@ -151,7 +152,9 @@ const ListProfile: React.FC = () => {
               <Profiles>
                 <img src={profile.avatar_front} alt="Perfil" />
                 <div>
-                  <h3>{profile.username}</h3>
+                  <Link to={`/Perfil/${profile.id}`}>{profile.username}</Link>
+                  {' '}
+                  <br />
                   <span>{profile.nome_perfil}</span>
                   <p>{profile.descricao_empresa}</p>
                 </div>

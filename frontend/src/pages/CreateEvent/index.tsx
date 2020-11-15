@@ -1,4 +1,10 @@
-import React, { ChangeEvent, useCallback, useRef, useState } from 'react';
+import React, {
+  ChangeEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
@@ -87,7 +93,15 @@ const CreateEvent: React.FC = () => {
         });
       }
     },
-    [formRef, newUser, addToast, getValidationErrors, event, history],
+    [
+      formRef,
+      newUser,
+      addToast,
+      getValidationErrors,
+      event,
+      history,
+      getValidationErrors,
+    ],
   );
   return (
     <>

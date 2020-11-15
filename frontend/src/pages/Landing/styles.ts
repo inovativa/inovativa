@@ -127,13 +127,19 @@ export const HeaderArtigo = styled.div`
   }
 `;
 export const InformationArtigo = styled.div`
-  body {
-    margin-top: 15px;
-    h3,
-    p {
+  a {
+    text-decoration: none;
+    &:hover {
+      color: #84e5e8;
+    }
+    h3 {
+      margin-top: 15px;
       font-size: 24px;
       color: #191919;
       line-height: 28px;
+    }
+    h3:hover {
+      color: #84e5e8;
     }
     p {
       color: #808080;
@@ -143,22 +149,21 @@ export const InformationArtigo = styled.div`
   }
 `;
 export const ImageArtigo = styled.div`
-margin-left: 25px;
-span {
-      font-size: 15px;
-    }
-    img{
-      height: 111px;
-      width: 164px;
-      margin-top: 22px;
-    }
-    button{
-      background: transparent;
-      border: none;
-      outline: 0;
-      cursor: pointer;
-    }
-}
+  margin-left: 25px;
+  span {
+    font-size: 15px;
+  }
+  img {
+    height: 111px;
+    width: 164px;
+    margin-top: 22px;
+  }
+  button {
+    background: transparent;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+  }
 `;
 export const Eventos = styled.div`
   margin-left: 35px;

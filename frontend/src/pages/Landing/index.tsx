@@ -109,7 +109,7 @@ const Landig: React.FC = () => {
     setStates([]);
   };
   const handleFavorite = useCallback(() => {
-    /// chamada da api
+    return '';
   }, []);
   return (
     <>
@@ -138,7 +138,7 @@ const Landig: React.FC = () => {
             </button>
             {states.length > 1 && (
               <ul>
-                <li key="null">
+                <li key="todos">
                   <button
                     type="button"
                     onClick={() => {
@@ -198,10 +198,10 @@ const Landig: React.FC = () => {
                           : convertDate(artigo.date)}
                       </span>
                     </HeaderArtigo>
-                    <body>
+                    <Link to={`Artigo/${artigo.id}`}>
                       <h3>{artigo.title}</h3>
                       <p>{artigo.subtitle}</p>
-                    </body>
+                    </Link>
                   </InformationArtigo>
                   <ImageArtigo>
                     <HeaderArtigo>
