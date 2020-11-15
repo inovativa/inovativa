@@ -13,7 +13,6 @@ class ArtigoController {
             .table('users')   
             .leftJoin("artigos", "users.id","artigos.user_id")
             .leftJoin("perfils", "users.perfil_id","perfils.id")
-            
             const list = res.map(item => {
                 return {
                     id:item.id,
@@ -24,6 +23,8 @@ class ArtigoController {
                     description: item.description,
                     subtitle: item.subtitle,
                     avatar: `http://localhost:3333/${item.avatar}`,
+                    avatar_user: `http://localhost:3333/${item.avatar_front}`,
+                    uf_user:item.uf,
                     date: item.created_at
                     }
            })
@@ -44,6 +45,8 @@ class ArtigoController {
                     description: item.description,
                     subtitle: item.subtitle,
                     avatar: `http://localhost:3333/${item.avatar}`,
+                    avatar_user: `http://localhost:3333/${item.avatar_front}`,
+                    uf_user:item.uf,
                     date: item.created_at
                     }
           })
