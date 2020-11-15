@@ -82,7 +82,16 @@ export const Title = styled.div`
     }
   }
 `;
-export const Profiles = styled.div``;
+export const Profiles = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  img {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+  }
+`;
 export const ArtigoItem = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr;

@@ -39,6 +39,9 @@ export const Title = styled.div`
       border: 0;
       background: transparent;
       cursor: pointer;
+      svg {
+        margin-top: 10px;
+      }
     }
     ul {
       background: #fff6bb;
@@ -80,6 +83,9 @@ export const Title = styled.div`
       height: 22px;
       cursor: pointer;
     }
+    svg {
+      margin-top: 8px;
+    }
   }
 `;
 export const Artigos = styled.div``;
@@ -120,6 +126,10 @@ export const InformationArtigo = styled.div`
       font-size: 24px;
       color: #191919;
     }
+    p {
+      color: #808080;
+      font-size: 20px;
+    }
   }
 `;
 export const ImageArtigo = styled.div`
@@ -130,7 +140,7 @@ span {
     img{
       height: 111px;
       width: 164px;
-      margin-top: 27px;
+      margin-top: 22px;
     }
     button{
       background: transparent;
@@ -152,7 +162,7 @@ export const TitleEvent = styled.h3`
 export const EventoItem = styled.div`
   display: flex;
   flex-direction: column;
-
+  margin-top: 30px;
   span {
     font-size: 15px;
     color: #535353;

@@ -41,8 +41,9 @@ export const AuthProvider: React.FC = ({ children }) => {
       password,
     });
     const { token, user } = response.data.data;
+
     localStorage.setItem('@Inovativa:token', token);
-    localStorage.setItem('@Inovativa:user', JSON.stringify(user));
+    localStorage.setItem('@Inovativa:user', JSON.stringify(user[0]));
 
     setData({ token, user });
   }, []);
