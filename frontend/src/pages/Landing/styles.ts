@@ -128,7 +128,7 @@ export const HeaderArtigo = styled.div`
 `;
 export const InformationArtigo = styled.div`
   body {
-    margin-top: 5px;
+    margin-top: 15px;
     h3,
     p {
       font-size: 24px;
@@ -138,6 +138,7 @@ export const InformationArtigo = styled.div`
     p {
       color: #808080;
       font-size: 20px;
+      margin-top: 8px;
     }
   }
 `;
