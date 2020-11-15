@@ -11,21 +11,22 @@ class EventoController {
             if(uf==null){
                 const res = await Database.select('*')
                 .table('users')
-                .leftJoin("eventos", "users.id","eventos.user_id")
                 .leftJoin("perfils", "users.perfil_id","perfils.id")
+                .leftJoin("eventos", "users.id","eventos.user_id")
                 .where('eventos.id','>',0)
             const list = res.map(item => {
                 return {
                     id:item.id,
                     user_id:item.user_id,
-                    uf_user:item.uf,
-                    city:item.city,
+                    nome_perfil:item.nome_perfil,
                     address: item.address,
                     title: item.title,
+                    description: item.description,
                     data: item.data,
                     hora: item.hora,
-                    description: item.description,
-                    avatar: `http://localhost:3333/${item.avatar}`,
+                    avatar_evento: `http://localhost:3333/${item.avatar}`,
+                    avatar_front: `http://localhost:3333/${item.avatar_front}`,
+                    date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
                   }
@@ -34,21 +35,22 @@ class EventoController {
             }
               const res = await Database.select('*')
                 .table('users')
-                .leftJoin("eventos", "users.id","eventos.user_id")
                 .leftJoin("perfils", "users.perfil_id","perfils.id")
+                .leftJoin("eventos", "users.id","eventos.user_id")
                 .where('eventos.id','>',0)
                 .where("users.uf",uf)
                 const list = res.map(item => {
                 return {
                     id:item.id,
-                    uf_user:item.uf,
-                    city:item.city,
+                    user_id:item.user_id,
+                    nome_perfil:item.nome_perfil,
                     address: item.address,
                     title: item.title,
                     description: item.description,
                     data: item.data,
                     hora: item.hora,
-                    avatar: `http://localhost:3333/${item.avatar}`,
+                    avatar_evento: `http://localhost:3333/${item.avatar}`,
+                    avatar_front: `http://localhost:3333/${item.avatar_front}`,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
@@ -64,19 +66,21 @@ class EventoController {
             const {id}=params
                 const res = await Database.select('*')
                 .table('users')
-                .leftJoin("eventos", "users.id","eventos.user_id")
                 .leftJoin("perfils", "users.perfil_id","perfils.id")
+                .leftJoin("eventos", "users.id","eventos.user_id")
                 .where('eventos.id',id)
             const list = res.map(item => {
                 return {
                     id:item.id,
                     user_id:item.user_id,
+                    nome_perfil:item.nome_perfil,
                     address: item.address,
                     title: item.title,
                     description: item.description,
                     data: item.data,
                     hora: item.hora,
-                    avatar: `http://localhost:3333/${item.avatar}`,
+                    avatar_evento: `http://localhost:3333/${item.avatar}`,
+                    avatar_front: `http://localhost:3333/${item.avatar_front}`,
                     date: item.created_at,
                     nome_perfil: item.nome_perfil,
                     username: item.username,
