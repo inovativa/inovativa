@@ -19,7 +19,7 @@ Route.post('/oneEvento/:id','EventoController.indexOne')
 Route.delete('/deleteEvento/:id','EventoController.delete')
 
 Route.post('/allstar','StarController.index')
-Route.post('/star/:evento_id/:user_id','StarController.create')
+Route.post('/star/:artigo_id/:user_id','StarController.create')
 Route.post('/ListStar/:id','StarController.indexOne')
 
 Route.post('/allUserStar','UserStarController.index')

@@ -18,6 +18,7 @@ class EventoController {
                 return {
                     id:item.id,
                     user_id:item.user_id,
+                    site:item.site,
                     nome_perfil:item.nome_perfil,
                     address: item.address,
                     title: item.title,
@@ -44,6 +45,7 @@ class EventoController {
                     id:item.id,
                     user_id:item.user_id,
                     nome_perfil:item.nome_perfil,
+                    site:item.site,
                     address: item.address,
                     title: item.title,
                     description: item.description,
@@ -74,6 +76,7 @@ class EventoController {
                     id:item.id,
                     user_id:item.user_id,
                     nome_perfil:item.nome_perfil,
+                    site:item.site,
                     address: item.address,
                     title: item.title,
                     description: item.description,

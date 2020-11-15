@@ -1,6 +1,6 @@
 'use strict'
 const Star=use('App/Models/Star')
-const Evento = use('App/Models/Evento')
+const Artigo = use('App/Models/Artigo')
 const Response = use('App/Models/Response')
 const Database = use("Database");
 class StarController {
@@ -16,12 +16,12 @@ class StarController {
        .table('users')   
        .leftJoin("stars", "users.id","stars.user_id")
        .where('stars.id','>',0)
-       .where('stars.user_id',id)
+       .where('stars.artigo_id',id)
        const list = res.map(item => {
         return {
             id:item.id,
-            evento_id:item.evento_id,
-            address: item.address,
+            artigo_id:item.artigo_id,
+            address: item.subtitle,
             title: item.title,
             description: item.description,
             avatar: `http://localhost:3333/${item.avatar}`,
@@ -31,23 +31,24 @@ class StarController {
        return Response.response(list, 200, "cadastrado com sucesso")
    }
    async create({params}){
-       const {evento_id,user_id}=params
-       const evento=await Evento.find(evento_id)
+       const {artigo_id,user_id}=params
+       const artigo=await Artigo.find(artigo_id)
        const verifyStar=await Star.query()
-                    .where('evento_id',evento_id)
-                    .getCount();       
+                    .where('artigo_id',artigo_id)
+                    .getCount();     
        if(verifyStar==0){
            const res = await Star.create({
                user_id:user_id,
-               evento_id: evento.id,
-               address: evento.address,
-               title: evento.title,
-               description: evento.description,
-               avatar: `http://localhost:3333/${evento.avatar}`,
+               evento_id: 1,
+               artigo_id: artigo.id,
+               address: artigo.subtitle,
+               title: artigo.title,
+               description: artigo.description,
+               avatar: `http://localhost:3333/${artigo.avatar}`,
             })
        return Response.response(res, 200, "histórico guardado com sucesso")
        }
-         await Star.query().where('evento_id',evento_id).delete()  
+         await Star.query().where('artigo_id',artigo_id).delete()  
        return Response.response(null, 200, "histórico deletado com sucesso")
    }
 }
