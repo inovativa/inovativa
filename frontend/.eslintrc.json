@@ -47,7 +47,7 @@
         }
      ],
      "no-use-before-define": "off",
-     "prettier/prettier": "error"
+     "prettier/prettier": 0
     },
     "settings": {
       "import/resolver": {
