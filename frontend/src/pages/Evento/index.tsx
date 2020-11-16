@@ -5,35 +5,17 @@ import api from '../../services/api';
 import convertDate from '../../utils/convertDate';
 import { PageEvento, EventoDados, Description } from './styles';
 
-interface UserInterface {
-  perfil_id: number;
-  username: string;
-  surname: string;
-  city: string;
-  uf: string;
-  empresa: string;
-  whatsapp: number;
-  email: string;
-  site: string;
-  linkedin: string;
-  descricao_empresa: string;
-  interesse: string;
-  nome_perfil: string;
-  id: string;
-  avatar_back?: string;
-  avatar_front?: string;
-}
 interface EventosResponse {
   id: string;
   address: string;
   title: string;
   description: string;
-  avatar: string;
+  avatar_evento: string;
   data: string; // nã
   nome_perfil: string;
   username: string;
   hora: string;
-  avatar_user: string;
+  avatar_front: string;
   site: string;
 }
 interface RouteParams {
@@ -43,10 +25,11 @@ const Evento: React.FC = () => {
   const { id } = useParams<RouteParams>();
   const [evento, setEvento] = useState<EventosResponse>();
   useEffect(() => {
-    api.post(`/OneArtigo/${id}`, {}).then(response => {
+    api.post(`/oneEvento/${id}`, {}).then(response => {
       const { data } = response.data;
-      setEvento(data);
+      setEvento(data[0]);
     });
+    console.log(evento);
   }, []);
   return (
     <PageEvento>
@@ -56,14 +39,14 @@ const Evento: React.FC = () => {
       <main>
         <header>
           <div>
-            <img src={evento?.avatar_user} alt="Imagem" />
+            <img src={evento?.avatar_front} alt="Imagem" />
             <p>{evento?.username}</p>
             <p>{evento?.nome_perfil}</p>
           </div>
         </header>
         <body>
           <EventoDados>
-            <img src={evento?.avatar} alt="Imagem" />
+            <img src={evento?.avatar_evento} alt="Imagem" />
             <div>
               <span>
                 {`${

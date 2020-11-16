@@ -32,7 +32,7 @@ interface StateInterface {
 
 interface ArtigosResponse {
   id: string;
-  date: Date; /// / Está retornando nulo
+  date: string; /// / Está retornando nulo
   nome_perfil: string;
   username: string;
   title: string;
@@ -61,9 +61,22 @@ interface UserInterface {
   id: string;
 }
 
+interface FavoritesInterface {
+  id: string;
+  artigo_id: string;
+  user_id: string;
+}
+
 const Landig: React.FC = () => {
   const [artigos, setArtigos] = useState<ArtigosResponse[]>([]);
   const [eventos, setEventos] = useState<EventosResponse[]>([]);
+  const [favorites, setFavorites] = useState<FavoritesInterface[]>([
+    {
+      id: ' ',
+      artigo_id: ' ',
+      user_id: ' ',
+    },
+  ]);
   const [states, setStates] = useState<StateInterface[]>([
     {
       nome: '',
@@ -77,14 +90,16 @@ const Landig: React.FC = () => {
   useEffect(() => {
     api.post(`artigo`, {}).then(response => {
       const { data } = response.data;
+      console.log(response);
       setArtigos(data);
     });
     api.post(`ListEvento`, {}).then(response => {
       const { data } = response.data;
       setEventos(data);
     });
+    console.log(favorites);
     setUf('Todos');
-  }, [newUser]);
+  }, []);
 
   const handleStates = useCallback(() => {
     if (states.length === 1) {
@@ -108,9 +123,11 @@ const Landig: React.FC = () => {
     setUf(newUf === '' ? 'Todos' : newUf);
     setStates([]);
   };
-  const handleFavorite = useCallback(() => {
-    /// chamada da api
-  }, []);
+  const handleFavorite = async (idArtigo: string) => {
+    await api.post(`/star/${idArtigo}/${newUser.id}`, {});
+    const newFavorites = await api.post(`/allstar`, {});
+    setFavorites(newFavorites.data);
+  };
   return (
     <>
       <header>
@@ -138,7 +155,7 @@ const Landig: React.FC = () => {
             </button>
             {states.length > 1 && (
               <ul>
-                <li key="null">
+                <li key="todos">
                   <button
                     type="button"
                     onClick={() => {
@@ -192,21 +209,20 @@ const Landig: React.FC = () => {
                           <span> {artigo.nome_perfil}</span>
                         </p>
                       </Link>
-                      <span>{artigo.date}</span>
+                      <span>
+                        {artigo.date === undefined
+                          ? ''
+                          : convertDate(artigo.date)}
+                      </span>
                     </HeaderArtigo>
-                    <body>
+                    <Link to={`Artigo/${artigo.id}`}>
                       <h3>{artigo.title}</h3>
                       <p>{artigo.subtitle}</p>
-                    </body>
+                    </Link>
                   </InformationArtigo>
                   <ImageArtigo>
                     <HeaderArtigo>
                       <span> {`${artigo.uf_user}`}</span>
-                      {!!user && (
-                        <button type="submit" onClick={handleFavorite}>
-                          <AiFillStar size={25} color="#C4C4C4" />
-                        </button>
-                      )}
                     </HeaderArtigo>
                     <img src={artigo.avatar} alt="" />
                   </ImageArtigo>
@@ -224,7 +240,7 @@ const Landig: React.FC = () => {
                         evento.data === undefined
                           ? ''
                           : convertDate(evento.data)
-                      }, ${evento.hora}`}{' '}
+                      }, ${evento.hora}`}
                     </span>
                     <img src={evento.avatar_evento} alt=" " />
                     <Link to={`Evento/${evento.id}`}>{evento.title}</Link>

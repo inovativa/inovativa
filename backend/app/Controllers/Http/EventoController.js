@@ -102,7 +102,7 @@ class EventoController {
             size: '500mb',
             extnames: ['png', 'jpg', 'svg', 'gif', 'PNG', 'JPG', 'SVG', 'GIF']
         }
-    try {
+    //try {
         const avatars = request.file('file', validationOptions)
         var avatar = `event/${new Date().getTime()}.${avatars.extname}`
             const res = await Evento.create({
@@ -121,9 +121,9 @@ class EventoController {
 
         if (!avatars.moved()) return avatars.error()
             return Response.response(res, 200, "cadastrado com sucesso")
-         } catch (err) {
+        /* } catch (err) {
             return Response.response(err, 500, "error no cadastro")
-        }
+        }*/
     }
 
    async delete({params}){

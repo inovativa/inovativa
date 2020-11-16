@@ -99,11 +99,15 @@ export const Profiles = styled.div`
       line-height: 21px;
       color: #808080;
     }
-    h3 {
+    a {
       font-size: 30px;
       line-height: 19px;
       color: #191919;
       font-weight: 400;
+      text-decoration: none;
+      &:hover {
+        color: #84e5e8;
+      }
     }
     span {
       font-size: 15px;

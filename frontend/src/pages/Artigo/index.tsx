@@ -45,7 +45,7 @@ const Artigo: React.FC = () => {
   useEffect(() => {
     api.post(`/OneArtigo/${id}`, {}).then(response => {
       const { data } = response.data;
-      setArtigo(data);
+      setArtigo(data[0]);
     });
   }, []);
   return (
