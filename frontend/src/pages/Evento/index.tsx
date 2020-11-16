@@ -27,7 +27,7 @@ const Evento: React.FC = () => {
   useEffect(() => {
     api.post(`/oneEvento/${id}`, {}).then(response => {
       const { data } = response.data;
-      setEvento(data);
+      setEvento(data[0]);
     });
     console.log(evento);
   }, []);

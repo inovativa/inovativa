@@ -69,7 +69,6 @@ const Register: React.FC = () => {
             'Senhas não coincidem, verifique.',
           ),
           name: Yup.string().required('Infome o nome.'),
-          surname: Yup.string().required('Infome o sobrenome.'),
           city: Yup.string().required('Infome a cidade.'),
           uf: Yup.string().required('Infome o estado.'),
           email: Yup.string().required('Campo e-mail é obrigatório.'),
@@ -102,7 +101,7 @@ const Register: React.FC = () => {
           title: 'Cadastrado com sucesso! ',
           description: 'Cadastro realizado',
         });
-        history.push('login');
+        // history.push('login');
       } catch (err) {
         if (err instanceof Yup.ValidationError) {
           const errors = getValidationErrors(err);
@@ -158,10 +157,7 @@ const Register: React.FC = () => {
               />
               <label htmlFor="mentorProfile">mentor</label>
             </ProfileType>
-            <GroupInput>
-              <Input background="#fff6bb" name="name" label="nome" />
-              <Input background="#fff6bb" name="surname" label="sobrenome" />
-            </GroupInput>
+            <Input background="#fff6bb" name="name" label="nome" />
             <GroupInput>
               <Input background="#fff6bb" name="city" label="cidade" />
               <Select name="uf">

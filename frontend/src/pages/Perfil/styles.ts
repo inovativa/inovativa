@@ -78,7 +78,6 @@ export const TitlePerfil = styled.div`
 
 export const Cover = styled.div`
   height: 6rem;
-  background: #747474;
   width: 100vw;
   display: flex;
   justify-content: center;

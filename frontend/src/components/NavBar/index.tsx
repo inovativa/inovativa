@@ -77,16 +77,6 @@ const NavBar: React.FC<NavBarProps> = ({ page }) => {
               </Link>
             </div>
           )}
-          {user && (
-            <div className="conectedIconContainer">
-              <img
-                src={conected}
-                alt="conected"
-                className="conectedIcon"
-                title="Conectado"
-              />
-            </div>
-          )}
         </RigthMenu>
       </ContainerStyles>
     </MenubarStyles>

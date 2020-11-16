@@ -61,9 +61,22 @@ interface UserInterface {
   id: string;
 }
 
+interface FavoritesInterface {
+  id: string;
+  artigo_id: string;
+  user_id: string;
+}
+
 const Landig: React.FC = () => {
   const [artigos, setArtigos] = useState<ArtigosResponse[]>([]);
   const [eventos, setEventos] = useState<EventosResponse[]>([]);
+  const [favorites, setFavorites] = useState<FavoritesInterface[]>([
+    {
+      id: ' ',
+      artigo_id: ' ',
+      user_id: ' ',
+    },
+  ]);
   const [states, setStates] = useState<StateInterface[]>([
     {
       nome: '',
@@ -77,14 +90,16 @@ const Landig: React.FC = () => {
   useEffect(() => {
     api.post(`artigo`, {}).then(response => {
       const { data } = response.data;
+      console.log(response);
       setArtigos(data);
     });
     api.post(`ListEvento`, {}).then(response => {
       const { data } = response.data;
       setEventos(data);
     });
+    console.log(favorites);
     setUf('Todos');
-  }, [newUser]);
+  }, []);
 
   const handleStates = useCallback(() => {
     if (states.length === 1) {
@@ -108,9 +123,11 @@ const Landig: React.FC = () => {
     setUf(newUf === '' ? 'Todos' : newUf);
     setStates([]);
   };
-  const handleFavorite = useCallback(() => {
-    return '';
-  }, []);
+  const handleFavorite = async (idArtigo: string) => {
+    await api.post(`/star/${idArtigo}/${newUser.id}`, {});
+    const newFavorites = await api.post(`/allstar`, {});
+    setFavorites(newFavorites.data);
+  };
   return (
     <>
       <header>
@@ -206,11 +223,6 @@ const Landig: React.FC = () => {
                   <ImageArtigo>
                     <HeaderArtigo>
                       <span> {`${artigo.uf_user}`}</span>
-                      {!!user && (
-                        <button type="submit" onClick={handleFavorite}>
-                          <AiFillStar size={25} color="#C4C4C4" />
-                        </button>
-                      )}
                     </HeaderArtigo>
                     <img src={artigo.avatar} alt="" />
                   </ImageArtigo>
